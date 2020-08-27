@@ -9,7 +9,7 @@ const adminRoutes = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 // use the bodyparser middleware
-app.use(bodyParser.urlencoded({extended: false})); // returns middleware that only parses urlencoded bodies
+app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
