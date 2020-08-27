@@ -18,8 +18,5 @@ app.use((req, res, next) => {
     res.send('<h1>Hello from Express!<h1/>');
 });
 
-// create a http server
-const server = http.createServer(app);
-
-// listen to the port localhost:3000
-server.listen(3000);
+// create an express server and listen to port 3000
+app.listen(3000);
