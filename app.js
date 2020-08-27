@@ -1,11 +1,12 @@
-// import statements: CORE modules
-const http = require('http');
-
 // import statements: NODE npm modules
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // create an exress app
 const app = express();
+
+// use the bodyparser middleware
+app.use(bodyParser.urlencoded({extended: false})); // returns middleware that only parses urlencoded bodies
 
 // configure the app to use middleware to listen to '/'
 app.use('/', (req, res, next) => {
@@ -15,7 +16,13 @@ app.use('/', (req, res, next) => {
 
 app.use('/add-product', (req, res, next) => {
     console.log('In the add product middleware');
-    res.send('<h1>The Add Product Page<h1/>');
+    res.send('<form action="/product" method="POST"><input type="text" name="title"><button type="submit">Add Product</button></form>');
+});
+
+// listens for the post requests for specified path
+app.post('/product', (req, res, next) => {
+    console.log(req.body);
+    res.redirect('/');
 });
 
 app.use('/', (req, res, next) => {

@@ -32,3 +32,8 @@ To use *nodemon* as a development server update the *package.json* file first as
 This will start the server
 
 ---
+`npm install --save body-parser`
+
+This will save and install body-parser
+
+---
