@@ -12,6 +12,8 @@ const shopRoutes = require('./routes/shop');
 
 // use the bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies
+// to allow app to use static file from public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRoutes);
 app.use(shopRoutes);
