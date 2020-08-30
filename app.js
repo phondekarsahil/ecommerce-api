@@ -4,7 +4,7 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
-const errorController = require('./controllers/error');
+const errorController = require("./controllers/error");
 
 // create an exress app
 const app = express();
@@ -12,7 +12,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-const adminData = require("./routes/admin");
+const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
 // use the bodyparser middleware
@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that 
 // to allow app to use static file from public folder
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/admin", adminData.routes);
+app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 app.use(errorController.get404);
