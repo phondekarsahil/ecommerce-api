@@ -37,3 +37,13 @@ This will start the server
 This will save and install body-parser
 
 ---
+`npm install --save pub ejs express-handlebars`
+
+This will install all three template engines: 
+* pug 
+* Ejs
+* Express-handlebars
+
+You can use any one
+
+---

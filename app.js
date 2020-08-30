@@ -7,7 +7,10 @@ const bodyParser = require('body-parser');
 // create an exress app
 const app = express();
 
-const adminRoutes = require('./routes/admin');
+app.set('view engine', 'pug');
+app.set('views', 'views');
+
+const adminData = require('./routes/admin');
 const shopRoutes = require('./routes/shop');
 
 // use the bodyparser middleware
@@ -15,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that 
 // to allow app to use static file from public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminRoutes);
+app.use('/admin', adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
