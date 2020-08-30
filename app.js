@@ -1,28 +1,38 @@
-const path = require('path');
+const path = require("path");
 
 // import statements: NODE npm modules
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
+const expressHbs = require('express-handlebars');
 
 // create an exress app
 const app = express();
 
-app.set('view engine', 'pug');
-app.set('views', 'views');
+app.engine(
+  "hbs",
+  expressHbs({
+    layoutsDir: "views/layouts/",
+    defaultLayout: "main-layout",
+    extname: "hbs",
+  })
+);
 
-const adminData = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+app.set("view engine", "hbs");
+app.set("views", "views");
+
+const adminData = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
 
 // use the bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies
 // to allow app to use static file from public folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/admin', adminData.routes);
+app.use("/admin", adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).render('404', {pageTitle: 'Page Not Found'});
+    res.status(404).render('404', { pageTitle: 'Page Not Found' });
 });
 
 // create an express server and listen to port 3000
