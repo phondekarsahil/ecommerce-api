@@ -1,25 +1,28 @@
-const path = require('path');
+const path = require("path");
 
 // import statements: NODE npm modules
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 // create an exress app
 const app = express();
 
-const adminRoutes = require('./routes/admin');
-const shopRoutes = require('./routes/shop');
+app.set("view engine", "ejs");
+app.set("views", "views");
+
+const adminData = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
 
 // use the bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies
 // to allow app to use static file from public folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/admin', adminRoutes);
+app.use("/admin", adminData.routes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(__dirname, 'views', '404.html'));
+    res.status(404).render('404', { pageTitle: 'Page Not Found' });
 });
 
 // create an express server and listen to port 3000
