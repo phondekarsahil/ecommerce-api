@@ -5,6 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const errorController = require("./controllers/error");
+const db = require("./util/database");
 
 // create an exress app
 const app = express();
@@ -14,6 +15,14 @@ app.set("views", "views");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+
+db.execute("SELECT * FROM products")
+  .then((result) => {
+    console.log(result[0], result[1]);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 // use the bodyparser middleware
 app.use(bodyParser.urlencoded({ extended: false })); // returns middleware that only parses urlencoded bodies
