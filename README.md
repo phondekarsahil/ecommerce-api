@@ -47,3 +47,8 @@ This will install all three template engines:
 You can use any one
 
 ---
+`npm install --save mysql2`
+
+This will install mysql2 package to use mysql queries inside node project
+
+---

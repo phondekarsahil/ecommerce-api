@@ -5,6 +5,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const errorController = require("./controllers/error");
+const db = require("./util/database");
 
 // create an exress app
 const app = express();
